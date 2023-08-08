@@ -1,0 +1,20 @@
+version: '3.8'
+networks:
+  nginx-certbot-proj_docker_nginx_network:
+    external: true
+
+services:
+  # PostgreSQL pgAdmin panel accessible at http://localhost:16543/
+  pgadmin-compose:
+    networks:
+      - nginx-certbot-proj_docker_nginx_network
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "placeholder@example.com"
+      PGADMIN_DEFAULT_PASSWORD: "fakepassword123!"
+    ports:
+      - "16543:80"
+    restart: unless-stopped
+    # dunno if we will need this
+    # depends_on:
+    #   - postgres
